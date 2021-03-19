@@ -1,0 +1,23 @@
+version: "2.0"
+
+services:
+  postgres:
+    container_name: "postgres"
+    hostname: "postgres"
+    image: "tn/postgres"
+    build:
+      context: .
+      args:
+        version: "9.6"
+        dbhost: "10.20.30.20"
+        dbport: "5432"
+        dbuser: "admin"
+        dbpassword: "password=TN"
+        dbname: "db_lava"
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./overlays/postgres/data:/var/lib/postgresql/data"
+    environment:
+      - "TZ=Asia/Taipei"
+    shm_size: 256M
